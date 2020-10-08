@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import io.reactivex.Scheduler;
@@ -27,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
         service.start();
 
         listenEvents();
+
+        // перейти во вторую активность
+        ((Button) findViewById(R.id.btnStartSecond)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SecondActivity.start(MainActivity.this);
+            }
+        });
     }
 
     @Override
@@ -36,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
         service.stopService();
     }
 
-    // тут принимаем данные
+    /**
+     * Слушать данные
+     */
     private void listenEvents() {
         disposable = rxBus.listen()
                 .subscribeOn(Schedulers.io())
@@ -51,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Показать сообщение
+     * @param message
+     */
     private void showMessage(final String message) {
         // запускаем Toast в главном UI потоке
         runOnUiThread(new Runnable() {

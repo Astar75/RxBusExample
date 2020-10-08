@@ -2,12 +2,13 @@ package com.astar.rxbusexample;
 
 import android.util.Log;
 
+/***
+ * Простейший класс сервис, например блютуз, который выполняет работу в стороннем потоке
+ */
 public class SomethingService extends Thread {
 
-
-    private boolean isRun = false;
+    private boolean isRun;
     private int count = 0;
-
     private RxBus rxBus;
 
     public SomethingService(RxBus rxBus) {
@@ -15,11 +16,18 @@ public class SomethingService extends Thread {
         isRun = true;
     }
 
+    /**
+     * Остановить сервис
+     * Для повторного запуска пересоздать экземляр класса и вызвать метод start()
+     */
     public void stopService() {
         isRun = false;
         rxBus = null;
     }
 
+    /***
+     * Тут выполняется какая то работа
+     */
     @Override
     public void run() {
         super.run();

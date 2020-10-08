@@ -9,6 +9,7 @@ public class MainApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        /* Создаем RxBus в единственном экзмепляре */
         bus = new RxBus();
     }
 

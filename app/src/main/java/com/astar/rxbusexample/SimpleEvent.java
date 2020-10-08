@@ -1,5 +1,9 @@
 package com.astar.rxbusexample;
 
+/**
+ * Простой объект для передачи.
+ * Может быть любым
+ */
 public class SimpleEvent {
     private int count;
 
